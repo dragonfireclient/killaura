@@ -1,0 +1,3 @@
+killaura (Killaura) bool false
+forcefield (ForceField) bool false
+friendlist (Friend List) string
