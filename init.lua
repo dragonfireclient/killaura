@@ -6,7 +6,7 @@ minetest.register_globalstep(function(dtime)
 	etime = etime + dtime
 	local control = player:get_control()
 	if minetest.settings:get_bool("killaura") or minetest.settings:get_bool("forcefield") and control.dig then
-		local interval_str = minetest.settings:get("killaura_interval") or "0"
+		local interval_str = minetest.settings:get("killaura_interval") or "auto"
 		local interval
 		if interval_str == "auto" then
 			interval = player:get_wielded_item():get_tool_capabilities().full_punch_interval
@@ -18,9 +18,10 @@ minetest.register_globalstep(function(dtime)
 		end
 		local punched_anything = false
 		local friendlist = (minetest.settings:get("friendlist") or ""):split(",")
+		local only_players = minetest.settings:get_bool("killaura_only_players")
 		for _, obj in ipairs(minetest.get_objects_inside_radius(player:get_pos(), 5)) do
 			local do_attack = true
-			if obj:is_local_player() then
+			if obj:is_local_player() or only_players and not obj:is_player() then
 				do_attack = false
 			else
 				for _, friend in ipairs(friendlist) do

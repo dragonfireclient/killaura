@@ -1,3 +1,5 @@
 killaura (Killaura) bool false
 forcefield (ForceField) bool false
 friendlist (Friend List) string
+killaura_interval (Killaura Interval) string "auto"
+killaura_only_players (Only Killaura Players) bool false
